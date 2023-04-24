@@ -1,0 +1,26 @@
+{# templates/home.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# ... #}
+
+{% block body %}
+    <h1>
+        {{ app.user.email }}
+    </h1>
+
+    <div style="margin: 25px">
+        {% if is_granted('IS_IMPERSONATOR') %}
+            <a href="{{ path('app_home', {'_switch_user': '_exit'}) }}">
+                Stop impersonating
+            </a>
+        {% endif %}
+    </div>
+
+    <div style="margin: 25px">
+        {% if app.user.email != 'test2@symfony.com' %}
+            <a class="btn" href="{{ path('app_home', { '_switch_user': 'test2@symfony.com' }) }}">
+                Start impersonating
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
